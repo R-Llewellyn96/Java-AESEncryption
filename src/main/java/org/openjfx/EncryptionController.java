@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.openjfx.validation.Validation;
+import runners.EncryptionRunner;
+import services.GeneratorService;
 
 import java.io.IOException;
 
@@ -76,12 +78,12 @@ public class EncryptionController {
         try {
 
             // Replace string with function to generate AES key and return string
-            String testString = "Im a testing string!";
-            aesEncryptionKey.setText(testString);
+            String keyString = GeneratorService.generateKey("AES", keyLengthBits());
+            aesEncryptionKey.setText(keyString);
 
             // Alert user that a key has been generated for them and tell them where it is
             AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Encryption Key Generation Successful!",
-                    "Valid AES Encryption key has been added to your text field!");
+                    "Valid AES Encryption key of : " + keyLengthBits() + " bits has been added to your text field!");
 
             // If theres a problem, tell user there was an error
         } catch (Exception e) {
@@ -139,8 +141,19 @@ public class EncryptionController {
         }
 
 
-        AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Encryption submission Successful!",
-                "Generating Ciphertext...");
+        try {
+
+            // Perform encryption, passing message and key
+            String IVandCiphertext = EncryptionRunner.encryptionRunnerWKey(aesEncryptionText.getText(), aesEncryptionKey.getText().trim());
+
+            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Encryption submission Successful!",
+                    "Successful Encryption!\n" +
+                            "Key Used: " + aesEncryptionKey.getText().trim() + "\n" + "Generated Ciphertext with pre-pended IV:\n" + IVandCiphertext);
+
+        } catch (Exception e) {
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
+                    "Unable to Encrypt ciphertext, please check inputs and try again!");
+        }
     }
 
     // Menu window

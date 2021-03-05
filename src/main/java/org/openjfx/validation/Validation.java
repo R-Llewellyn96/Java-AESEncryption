@@ -9,7 +9,7 @@ public class Validation {
     public static boolean isValidKey(String passedKeyString) {
 
         // Regex pattern to detect invalid AES Key characters
-        String regexPattern = "(s+)|(;)|(:)|(')|(\")|(,)|(<)|(\\.)|(\\[)|(\\{)|(])|(})|(-)|(_)|( )";
+        String regexPattern = "(;)|(:)|(')|(\")|(,)|(<)|(\\.)|(\\[)|(\\{)|(])|(})|(-)|(_)|( )";
 
         // Perform regex pattern matching against given string
         Pattern pattern = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);

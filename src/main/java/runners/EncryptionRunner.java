@@ -44,6 +44,24 @@ public class EncryptionRunner {
         System.out.println("\nProgram Terminated.");
     }
 
+    public static String encryptionRunnerWKey(String message, String key) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
+
+        // Define encryption model object
+        EncryptionModel encryptionModel = new EncryptionModel();
+
+        // Set object values
+        encryptionModel.setEncryptionAlgorithm("AES/CBC/PKCS5Padding");
+        encryptionModel.setKeyString(key);
+        encryptionModel.setIvString(GeneratorService.generateIV());
+        encryptionModel.setMessage(message);
+
+        // Encrypt Message
+        String ciphertext = EncryptDecryptService.encrypt(encryptionModel);
+
+        // Return IV prepended to Ciphertext
+        return (encryptionModel.getIvString() + ciphertext);
+    }
+
     public static void decryptionRunner(String IvAndCiphertext, String encryptionKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
 
         // Define encryption model object
