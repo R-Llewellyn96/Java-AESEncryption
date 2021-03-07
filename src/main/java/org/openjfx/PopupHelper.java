@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import java.io.IOException;
 
 public class PopupHelper {
@@ -18,70 +17,33 @@ public class PopupHelper {
     private Parent root;
 
     @FXML
-    private Button btnReturnToEncryption;
+    private TextField aesEncryptionKey;
 
     @FXML
-    ToggleGroup keyLengthToggleGroup;
+    private TextArea aesEncryptionText;
 
-    @FXML
-    private RadioButton radioButton128;
-
-    @FXML
-    private RadioButton radioButton256;
-
-    @FXML
-    private static TextField aesEncryptionKey;
-
-    @FXML
-    private static TextArea aesEncryptionText;
-
-    @FXML
-    private Button generateEncryptionKeyRandom;
-
-    @FXML
-    private Button generateEncryptionKeyPassword;
-
-    @FXML
-    private Button generateEncryptedTextBtn;
-
-    public static void setValues(String keyString, String ivAndCiphertextString) {
-        try{
-        aesEncryptionKey.setText("keyString");
-        aesEncryptionText.setText("ivAndCiphertextString");
-        } catch (Exception e) {
-            System.out.println();
-        }
-    }
-
-    public static void showPopup(Alert.AlertType alertType, Window owner, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.initOwner(owner);
-        alert.show();
-    }
-
-    public static void showResolutionAlert(Alert.AlertType alertType, Window owner, String title, String message, int width, int height) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.initOwner(owner);
-        alert.setWidth(width);
-        alert.setHeight(height);
-        alert.setResizable(false);
-        alert.show();
+    public void setValues(String keyString, String ivAndCiphertextString) {
+        aesEncryptionKey.setText(keyString);
+        aesEncryptionText.setText(ivAndCiphertextString);
+        aesEncryptionKey.setEditable(false);
+        aesEncryptionText.setEditable(false);
     }
 
     // Menu window
-    public void swtichToEncryption(ActionEvent event) throws IOException {
+    public void switchToEncryption(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("encryptionWindow.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("encryptionWindow.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionWindow.fxml"));
+        root = loader.load();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
+        stage.setMinWidth(780);
+        stage.setMinHeight(440);
+        stage.setMaxWidth(780);
+        stage.setMaxHeight(440);
         stage.setWidth(780);
         stage.setHeight(440);
         stage.setResizable(false);

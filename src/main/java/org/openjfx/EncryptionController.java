@@ -22,16 +22,10 @@ public class EncryptionController {
     private Parent root;
 
     @FXML
-    private Button btnReturnToMainMenu;
-
-    @FXML
     ToggleGroup keyLengthToggleGroup;
 
     @FXML
     private RadioButton radioButton128;
-
-    @FXML
-    private RadioButton radioButton256;
 
     @FXML
     private TextField aesEncryptionKey;
@@ -71,7 +65,7 @@ public class EncryptionController {
 
     // Handle click event on generate key randomly button
     @FXML
-    protected void handleKeyGenButtonAction(ActionEvent event) {
+    protected void handleKeyGenButtonAction() {
         Window owner = generateEncryptionKeyRandom.getScene().getWindow();
 
         // Try catch in case the AES key generation fails or setting text fails
@@ -92,10 +86,10 @@ public class EncryptionController {
         }
     }
 
-    // Handle click event on generate key randomly button
+    // Handle click event on generate key using password button
     @FXML
-    protected void handlePasswordKeyGenButtonAction(ActionEvent event) {
-        Window owner = generateEncryptionKeyRandom.getScene().getWindow();
+    protected void handlePasswordKeyGenButtonAction() {
+        Window owner = generateEncryptionKeyPassword.getScene().getWindow();
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
@@ -119,6 +113,8 @@ public class EncryptionController {
     @FXML
     protected void handleEncryptButtonAction(ActionEvent event) {
         Window owner = generateEncryptedTextBtn.getScene().getWindow();
+
+        // Handle form validation
         if(aesEncryptionKey.getText().isEmpty()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter an AES Encryption Key!");
@@ -141,29 +137,59 @@ public class EncryptionController {
         }
 
 
+        // Run if no validation has failed
         try {
 
-            // Perform encryption, passing message and key
-            String IVandCiphertext = EncryptionRunner.encryptionRunnerWKey(aesEncryptionText.getText(), aesEncryptionKey.getText().trim());
+            // Define key and message
+            String key = aesEncryptionKey.getText().trim();
+            String message = aesEncryptionText.getText();
 
-            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Encryption submission Successful!",
-                    "Successful Encryption!\n" +
-                            "Key Used: " + aesEncryptionKey.getText().trim() + "\n" + "Generated Ciphertext with pre-pended IV:\n" + IVandCiphertext);
+            // Perform encryption, passing message and key
+            String IVAndCiphertext = EncryptionRunner.encryptionRunnerWKey(message, key);
+
+            // Switch to finished popup if successful containing data
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionPopup.fxml"));
+            root = loader.load();
+
+            // Load controller from popup
+            PopupHelper popupHelper = loader.getController();
+
+            // Use popup controller instance to call method and set values
+            popupHelper.setValues(key, IVAndCiphertext);
+
+            // Generate window of popup
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.hide();
+            stage.setMinWidth(780);
+            stage.setMinHeight(340);
+            stage.setMaxWidth(780);
+            stage.setMaxHeight(340);
+            stage.setWidth(780);
+            stage.setHeight(340);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
 
         } catch (Exception e) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
                     "Unable to Encrypt ciphertext, please check inputs and try again!");
+            System.out.println(e);
         }
     }
 
     // Menu window
-    public void swtichToMainMenu(ActionEvent event) throws IOException {
+    public void switchToMainMenu(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
+        stage.setMinWidth(400);
+        stage.setMinHeight(150);
+        stage.setMaxWidth(400);
+        stage.setMaxHeight(150);
         stage.setWidth(400);
         stage.setHeight(150);
         stage.setResizable(false);

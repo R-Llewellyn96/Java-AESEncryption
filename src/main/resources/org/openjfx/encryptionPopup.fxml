@@ -23,8 +23,8 @@
             </MenuBar>
             <HBox spacing="10.0">
                <children>
-                  <Button fx:id="btnReturnToEncryption" mnemonicParsing="false" onAction="#swtichToEncryption" text="Back to Encryption" />
-                  <Region minWidth="0.0" prefHeight="25.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnReturnToEncryption" mnemonicParsing="false" onAction="#switchToEncryption" text="Back to Encryption" />
+                  <Region HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -37,17 +37,17 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Region prefHeight="29.0" prefWidth="27.0">
+                  <Region minWidth="25.0" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>
                   </Region>
-                  <TextField fx:id="aesEncryptionKey" prefHeight="25.0" prefWidth="327.0" promptText="AES Encryption Key">
+                  <TextField fx:id="aesEncryptionKey" editable="false" minHeight="30.0" minWidth="580.0" promptText="AES Encryption Key">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <Region minWidth="0.0" prefHeight="25.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets left="8.0" />
@@ -63,9 +63,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Region minWidth="0.0" prefHeight="25.0" prefWidth="0.0" />
-                  <TextArea fx:id="aesEncryptionText" prefHeight="180.0" prefWidth="580.0" promptText="Encryption Message" />
-                  <Region minWidth="0.0" prefHeight="25.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <Region />
+                  <TextArea fx:id="aesEncryptionText" editable="false" minHeight="40.0" minWidth="580.0" prefHeight="40.0" promptText="Encryption Message" />
+                  <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets left="8.0" />
@@ -73,6 +73,21 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+            </HBox>
+            <HBox minHeight="125.0" prefHeight="125.0" spacing="10.0">
+               <children>
+                  <Label text="ATTENTION! Read info: ">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Region minWidth="5.0" />
+                  <TextArea fx:id="aesEncryptionText1" editable="false" minWidth="580.0" promptText="Encryption Message" text="WARNING: Your AES Encryption key must be kept secret at all times! &#10;only share this key with the person you intend to communicate with, &#10;and ensure you transfer the key in a secure manner (preferably not using electronic means!)&#10;&#10;The Initialisation Vector (IV) has been pre-pended to your now encrypted message, &#10;this is known as ciphertext and can be safely transmitted anyway you like." />
+                  <Region HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
