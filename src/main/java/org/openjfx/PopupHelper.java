@@ -22,11 +22,24 @@ public class PopupHelper {
     @FXML
     private TextArea aesEncryptionText;
 
+    @FXML
+    private Label aesEncryptionKeyLabel;
+
+    @FXML
+    private Label aesEncryptionTextLabel;
+
+    // Set text area text
     public void setValues(String keyString, String ivAndCiphertextString) {
         aesEncryptionKey.setText(keyString);
         aesEncryptionText.setText(ivAndCiphertextString);
         aesEncryptionKey.setEditable(false);
         aesEncryptionText.setEditable(false);
+    }
+
+    // Set label text
+    public void setLabels(String encryptionKeyLabel, String encryptedMessageLabel) {
+        aesEncryptionKeyLabel.setText(encryptionKeyLabel);
+        aesEncryptionTextLabel.setText(encryptedMessageLabel);
     }
 
     // Menu window

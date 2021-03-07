@@ -174,7 +174,6 @@ public class EncryptionController {
         } catch (Exception e) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
                     "Unable to Encrypt ciphertext, please check inputs and try again!");
-            System.out.println(e);
         }
     }
 

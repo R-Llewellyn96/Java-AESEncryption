@@ -32,7 +32,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="77.0" spacing="10.0">
                <children>
-                  <Label text="AES Encryption Key">
+                  <Label fx:id="aesEncryptionKeyLabel" text="AES Encryption Key">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -58,7 +58,7 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="105.0" spacing="10.0">
                <children>
-                  <Label text="Encrypted IV + Message">
+                  <Label fx:id="aesEncryptionTextLabel" text="Encrypted IV + Message">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

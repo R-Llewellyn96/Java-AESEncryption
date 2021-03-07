@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import runners.EncryptionRunner;
 
 import java.io.IOException;
 
@@ -89,20 +90,62 @@ public class DecryptionController {
 
         // Get encryption key entered
         if(!txtAesDecryptionKey.getText().isEmpty() && !txtAesDecryptionKey.getText().isBlank() && txtAesDecryptionKey.getText().length() == keyLenRequired()) {
-            decryptKey = txtAesDecryptionKey.getText();
+            decryptKey = txtAesDecryptionKey.getText().trim();
         } else {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter a valid AES Encryption Key!\nLength of Encryption key must match radio button selection!");
             return;
         }
 
-        // Get encryption key entered
+        // Get encryption ciphertext entered
         if(!txtAesCiphertext.getText().isEmpty() && !txtAesCiphertext.getText().isBlank()) {
-            aesCiphertextString = txtAesCiphertext.getText();
+            aesCiphertextString = txtAesCiphertext.getText().trim();
         } else {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter valid AES Encrypted Ciphertext!");
             return;
+        }
+
+        // User gathered values to perform decryption
+        try {
+            // Define key and message
+            String key = decryptKey;
+            String message = aesCiphertextString;
+
+            // Perform encryption, passing message and key
+            String IVAndCiphertext = EncryptionRunner.decryptionRunnerWGUI(message, key);
+
+            // Switch to finished popup if successful containing data
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionPopup.fxml"));
+            root = loader.load();
+
+            // Load controller from popup
+            PopupHelper popupHelper = loader.getController();
+
+            // Use popup controller instance to call method and set values
+            popupHelper.setValues(key, IVAndCiphertext);
+
+            // Use popup controller instance to call method and set label values
+            popupHelper.setLabels("AES Decryption Key","Decrypted Ciphertext");
+
+            // Generate window of popup
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.hide();
+            stage.setMinWidth(780);
+            stage.setMinHeight(340);
+            stage.setMaxWidth(780);
+            stage.setMaxHeight(340);
+            stage.setWidth(780);
+            stage.setHeight(340);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
+                    "Unable to Decrypt ciphertext, please check inputs and try again!");
+            System.out.println(e);
         }
 
         // Alert shown if all validation is passed

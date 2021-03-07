@@ -63,11 +63,11 @@ public class SceneController {
         scene = new Scene(root);
         stage.hide();
         stage.setMinWidth(450);
-        stage.setMinHeight(225);
+        stage.setMinHeight(250);
         stage.setMaxWidth(450);
-        stage.setMaxHeight(225);
+        stage.setMaxHeight(250);
         stage.setWidth(450);
-        stage.setHeight(225);
+        stage.setHeight(250);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

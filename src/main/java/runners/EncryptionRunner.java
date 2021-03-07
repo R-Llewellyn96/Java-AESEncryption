@@ -93,4 +93,27 @@ public class EncryptionRunner {
         // End of main method
         System.out.println("\nProgram Terminated.");
     }
+
+    public static String decryptionRunnerWGUI(String IvAndCiphertext, String encryptionKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
+
+        // Define encryption model object
+        EncryptionModel encryptionModel = new EncryptionModel();
+
+        // Set object values
+        encryptionModel.setEncryptionAlgorithm("AES/CBC/PKCS5Padding");
+
+        // split IV and Key, [0] = IV, [1] = Key
+        String[] ivAndCiphertextArr = UtilConverters.stripIVFromCiphertext(IvAndCiphertext);
+
+        // Set IV, Ciphertext and Key
+        encryptionModel.setIvString(ivAndCiphertextArr[0]);
+        encryptionModel.setMessage(ivAndCiphertextArr[1]);
+        encryptionModel.setKeyString(encryptionKey);
+
+        // Decrypt Message
+        String plaintext = EncryptDecryptService.decrypt(encryptionModel);
+
+        // Return Decrypted Message
+        return plaintext;
+    }
 }

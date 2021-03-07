@@ -64,10 +64,11 @@ public class CodebookController {
             selectedMonth = selectedMonth - 1;
         }
 
+        // Attempt to generate codebook using user inputs, if successful show alert, if a failure show error alert
         try {
-            CodebookGenerator.generateCodeBook(selectedMonth, 256);
+            CodebookGenerator.generateCodeBook(selectedMonth, keyLenBitsRequired());
             AlertHelper.showAlert(Alert.AlertType.INFORMATION, owner, "Codebook submission successful!",
-                    "Generating Codebook for selected month...");
+                    "Codebook Generated for month: " + choiceBoxMonth.getSelectionModel().getSelectedItem());
         } catch (Exception e) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Codebook submission failed!",
                     "Error generating Codebook!");
