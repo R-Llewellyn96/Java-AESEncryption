@@ -15,24 +15,11 @@ import java.io.IOException;
 
 public class CodebookController {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
     @FXML
     private RadioButton radioButton128;
 
     @FXML
-    private RadioButton radioButton256;
-
-    @FXML
-    ToggleGroup toggleGroupKeyLength;
-
-    @FXML
     private ChoiceBox choiceBoxMonth;
-
-    @FXML
-    private Button btnMenu;
 
     @FXML
     private Button btnGenerateCodebook;
@@ -47,6 +34,7 @@ public class CodebookController {
         }
     }
 
+    // Method generates codebook for selected month
     public void generateCodebookClicked() {
         Window owner = btnGenerateCodebook.getScene().getWindow();
 
@@ -73,16 +61,13 @@ public class CodebookController {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Codebook submission failed!",
                     "Error generating Codebook!");
         }
-
     }
 
     // Menu window
-    public void swtichToMainMenu(ActionEvent event) throws IOException {
-
+    public void switchToMainMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.hide();
         stage.setMinWidth(400);
         stage.setMinHeight(150);

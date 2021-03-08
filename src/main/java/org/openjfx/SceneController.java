@@ -16,10 +16,8 @@ public class SceneController {
     private Parent root;
 
     // Encryption Window
-    public void swtichToEncryption(ActionEvent event) throws IOException {
-
+    public void switchToEncryption(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("encryptionWindow.fxml"));
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
@@ -35,10 +33,8 @@ public class SceneController {
     }
 
     // Decryption Window
-    public void swtichToDecryption(ActionEvent event) throws IOException {
-
+    public void switchToDecryption(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("decryptionWindow.fxml"));
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
@@ -55,10 +51,8 @@ public class SceneController {
 
 
     // Codebook window
-    public void swtichToCodebook(ActionEvent event) throws IOException {
-
+    public void switchToCodebook(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("codebookWindow.fxml"));
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();

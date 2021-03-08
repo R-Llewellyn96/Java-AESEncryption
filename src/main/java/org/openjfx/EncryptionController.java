@@ -19,7 +19,6 @@ public class EncryptionController {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     @FXML
     ToggleGroup keyLengthToggleGroup;
@@ -70,7 +69,6 @@ public class EncryptionController {
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
-
             // Replace string with function to generate AES key and return string
             String keyString = GeneratorService.generateKey("AES", keyLengthBits());
             aesEncryptionKey.setText(keyString);
@@ -93,7 +91,6 @@ public class EncryptionController {
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
-
             // Replace string with function to generate AES key and return string
             String testString = "Im a testing string!";
             aesEncryptionKey.setText(testString);
@@ -130,16 +127,14 @@ public class EncryptionController {
                     "AES Encryption key length is: " + aesEncryptionKey.getText().length()  + ", not the required length of: " + keyLenRequired());
             return;
         }
-        if(Validation.isValidKey(aesEncryptionKey.getText()) == false) {
+        if(!Validation.isValidKey(aesEncryptionKey.getText())) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Invalid AES Key, please try a valid key!");
             return;
         }
 
-
         // Run if no validation has failed
         try {
-
             // Define key and message
             String key = aesEncryptionKey.getText().trim();
             String message = aesEncryptionText.getText();
@@ -149,7 +144,7 @@ public class EncryptionController {
 
             // Switch to finished popup if successful containing data
             FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionPopup.fxml"));
-            root = loader.load();
+            Parent root = loader.load();
 
             // Load controller from popup
             PopupHelper popupHelper = loader.getController();
@@ -162,15 +157,16 @@ public class EncryptionController {
             scene = new Scene(root);
             stage.hide();
             stage.setMinWidth(780);
-            stage.setMinHeight(360);
+            stage.setMinHeight(480);
             stage.setMaxWidth(780);
-            stage.setMaxHeight(360);
+            stage.setMaxHeight(480);
             stage.setWidth(780);
-            stage.setHeight(360);
+            stage.setHeight(480);
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
 
+            // If validation fails, show error message
         } catch (Exception e) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
                     "Unable to Encrypt ciphertext, please check inputs and try again!");
@@ -179,9 +175,7 @@ public class EncryptionController {
 
     // Menu window
     public void switchToMainMenu(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();

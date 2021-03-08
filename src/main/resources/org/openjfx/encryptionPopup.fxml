@@ -18,7 +18,7 @@
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="Encryption Mode" />
+                <Menu fx:id="menuBarTitleText" mnemonicParsing="false" text="Encryption Mode" />
               </menus>
             </MenuBar>
             <HBox spacing="10.0">

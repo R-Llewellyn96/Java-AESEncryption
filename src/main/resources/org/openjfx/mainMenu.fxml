@@ -46,17 +46,17 @@
       <children>
             <HBox fillHeight="false" layoutY="41.0">
                <children>
-                  <Button fx:id="btnEncryptionMenu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#swtichToEncryption" text="Encryption&#10;Mode">
+                  <Button fx:id="btnEncryptionMenu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToEncryption" text="Encryption&#10;Mode">
                      <HBox.margin>
                         <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnDecryptionMenu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#swtichToDecryption" text="Decryption&#10;Mode">
+                  <Button fx:id="btnDecryptionMenu" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchToDecryption" text="Decryption&#10;Mode">
                      <HBox.margin>
                         <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnCodebookMenu" alignment="CENTER" mnemonicParsing="false" onAction="#swtichToCodebook" text="Codebook&#10;Generation">
+                  <Button fx:id="btnCodebookMenu" alignment="CENTER" mnemonicParsing="false" onAction="#switchToCodebook" text="Codebook&#10;Generation">
                      <HBox.margin>
                         <Insets bottom="10.0" left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>

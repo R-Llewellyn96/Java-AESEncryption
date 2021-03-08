@@ -17,13 +17,9 @@ public class DecryptionController {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
     @FXML
     private RadioButton radioButton128;
-
-    @FXML
-    private RadioButton radioButton256;
 
     @FXML
     ToggleGroup toggleGroupKeyLength;
@@ -37,11 +33,6 @@ public class DecryptionController {
     @FXML
     private Button btnGenerateDecryptedText;
 
-    // Define values to get from user inputs
-    private int aesKeyLength;
-    private String decryptKey;
-    private String aesCiphertextString;
-
     // Returns the required key length based on selection
     private int keyLenRequired() {
         // Check radio button selection
@@ -49,15 +40,6 @@ public class DecryptionController {
             return (24);
         } else {
             return (44);
-        }
-    }
-
-    // Returns the key length selected in bits
-    private int keyLengthBits() {
-        if (keyLenRequired() == 24) {
-            return 128;
-        } else {
-            return 256;
         }
     }
 
@@ -88,7 +70,8 @@ public class DecryptionController {
             return;
         }
 
-        // Get encryption key entered
+        // Get encryption key entered, if there isn't one show error
+        String decryptKey;
         if(!txtAesDecryptionKey.getText().isEmpty() && !txtAesDecryptionKey.getText().isBlank() && txtAesDecryptionKey.getText().length() == keyLenRequired()) {
             decryptKey = txtAesDecryptionKey.getText().trim();
         } else {
@@ -97,7 +80,8 @@ public class DecryptionController {
             return;
         }
 
-        // Get encryption ciphertext entered
+        // Get encryption ciphertext entered, if there isn't one show error
+        String aesCiphertextString;
         if(!txtAesCiphertext.getText().isEmpty() && !txtAesCiphertext.getText().isBlank()) {
             aesCiphertextString = txtAesCiphertext.getText().trim();
         } else {
@@ -108,28 +92,33 @@ public class DecryptionController {
 
         // User gathered values to perform decryption
         try {
-            // Define key and message
-            String key = decryptKey;
-            String message = aesCiphertextString;
-
             // Perform encryption, passing message and key
-            String IVAndCiphertext = EncryptionRunner.decryptionRunnerWGUI(message, key);
+            String IVAndCiphertext = EncryptionRunner.decryptionRunnerWGUI(aesCiphertextString, decryptKey);
 
             // Switch to finished popup if successful containing data
             FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionPopup.fxml"));
-            root = loader.load();
+            Parent root = loader.load();
 
             // Load controller from popup
             PopupHelper popupHelper = loader.getController();
 
             // Use popup controller instance to call method and set values
-            popupHelper.setValues(key, IVAndCiphertext);
+            popupHelper.setValues(decryptKey, IVAndCiphertext);
 
             // Use popup controller instance to call method and set label values
             popupHelper.setLabels("AES Decryption Key","Decrypted Ciphertext");
 
             // Use popup controller instance to call method and set region sizes
             popupHelper.setRegion(13,15);
+
+            // Set Return button text
+            popupHelper.setButtonText("Back To Decryption");
+
+            // Set Menu Title text
+            popupHelper.setMenuBarTitleText("Decryption Mode");
+
+            // Use popup controller instance to call method and set back button action
+            popupHelper.switchBackButtonAction();
 
             // Generate window of popup
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -145,19 +134,17 @@ public class DecryptionController {
             stage.setScene(scene);
             stage.show();
 
+            // Catch any runtime error and fail safely by showing error message
         } catch (Exception e) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
                     "Unable to Decrypt ciphertext, please check inputs and try again!");
-            System.out.println(e);
         }
     }
 
 
     // Menu window
-    public void swtichToMainMenu(ActionEvent event) throws IOException {
-
+    public void switchToMainMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();

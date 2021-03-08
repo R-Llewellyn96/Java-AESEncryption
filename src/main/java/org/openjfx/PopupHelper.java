@@ -13,9 +13,11 @@ import java.io.IOException;
 
 public class PopupHelper {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    @FXML
+    private Menu menuBarTitleText;
+
+    @FXML
+    private Button btnReturnToEncryption;
 
     @FXML
     private TextField aesEncryptionKey;
@@ -34,6 +36,16 @@ public class PopupHelper {
 
     @FXML
     private Region regionMessagePrepend;
+
+    // Set Menu Title text
+    public void setMenuBarTitleText(String menuText) {
+        menuBarTitleText.setText(menuText);
+    }
+
+    // Set Return Button text
+    public void setButtonText(String buttonText){
+        btnReturnToEncryption.setText(buttonText);
+    }
 
     // Set text area text
     public void setValues(String keyString, String ivAndCiphertextString) {
@@ -55,16 +67,23 @@ public class PopupHelper {
         regionMessagePrepend.setMinWidth(messageRegionLength);
     }
 
-    // Menu window
+    // Set action on click of return button, switch to return to decryption window
+    public void switchBackButtonAction() {
+        btnReturnToEncryption.setOnAction(e -> {
+            try {
+                switchToDecryption(e);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+    }
+
+    // Encryption window
     public void switchToEncryption(ActionEvent event) throws IOException {
-
-        //Parent root = FXMLLoader.load(getClass().getResource("encryptionWindow.fxml"));
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionWindow.fxml"));
-        root = loader.load();
-
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.hide();
         stage.setMinWidth(780);
         stage.setMinHeight(440);
@@ -72,6 +91,24 @@ public class PopupHelper {
         stage.setMaxHeight(440);
         stage.setWidth(780);
         stage.setHeight(440);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // Decryption window
+    public void switchToDecryption(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("decryptionWindow.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.hide();
+        stage.setMinWidth(780);
+        stage.setMinHeight(300);
+        stage.setMaxWidth(780);
+        stage.setMaxHeight(300);
+        stage.setWidth(780);
+        stage.setHeight(300);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

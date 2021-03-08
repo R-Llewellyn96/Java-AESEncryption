@@ -26,7 +26,7 @@
             </MenuBar>
             <HBox spacing="10.0">
                <children>
-                  <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#swtichToMainMenu" text="Back to menu" />
+                  <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#switchToMainMenu" text="Back to menu" />
                   <Region minWidth="0.0" prefHeight="25.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
