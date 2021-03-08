@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -28,6 +29,12 @@ public class PopupHelper {
     @FXML
     private Label aesEncryptionTextLabel;
 
+    @FXML
+    private Region regionKeyPrepend;
+
+    @FXML
+    private Region regionMessagePrepend;
+
     // Set text area text
     public void setValues(String keyString, String ivAndCiphertextString) {
         aesEncryptionKey.setText(keyString);
@@ -40,6 +47,12 @@ public class PopupHelper {
     public void setLabels(String encryptionKeyLabel, String encryptedMessageLabel) {
         aesEncryptionKeyLabel.setText(encryptionKeyLabel);
         aesEncryptionTextLabel.setText(encryptedMessageLabel);
+    }
+
+    // Set region sizes
+    public void setRegion(int keyRegionLength, int messageRegionLength) {
+        regionKeyPrepend.setMinWidth(keyRegionLength);
+        regionMessagePrepend.setMinWidth(messageRegionLength);
     }
 
     // Menu window

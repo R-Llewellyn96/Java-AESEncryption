@@ -128,16 +128,19 @@ public class DecryptionController {
             // Use popup controller instance to call method and set label values
             popupHelper.setLabels("AES Decryption Key","Decrypted Ciphertext");
 
+            // Use popup controller instance to call method and set region sizes
+            popupHelper.setRegion(13,15);
+
             // Generate window of popup
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.hide();
             stage.setMinWidth(780);
-            stage.setMinHeight(340);
+            stage.setMinHeight(480);
             stage.setMaxWidth(780);
-            stage.setMaxHeight(340);
+            stage.setMaxHeight(480);
             stage.setWidth(780);
-            stage.setHeight(340);
+            stage.setHeight(480);
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
@@ -147,13 +150,6 @@ public class DecryptionController {
                     "Unable to Decrypt ciphertext, please check inputs and try again!");
             System.out.println(e);
         }
-
-        // Alert shown if all validation is passed
-        AlertHelper.showResolutionAlert(Alert.AlertType.CONFIRMATION, owner, "Decryption submission Successful!",
-                "Decrypting Ciphertext...\n" +
-                        "Using AES Key Length: " + keyLengthBits() + "\n" +
-                        "Using AES Key: " + decryptKey + "\n\n" +
-                        "Encrypted Ciphertext: " + aesCiphertextString + "\n", 1024, 1024);
     }
 
 

@@ -91,7 +91,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea fx:id="aesEncryptionText" minWidth="580.0" promptText="Encryption Message" />
+                  <TextArea fx:id="aesEncryptionText" minHeight="180.0" minWidth="580.0" promptText="Encryption Message" />
                   <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>

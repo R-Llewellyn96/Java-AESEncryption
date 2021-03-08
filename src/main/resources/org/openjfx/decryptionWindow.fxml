@@ -69,7 +69,7 @@
                      </HBox.margin>
                   </Label>
                   <Region layoutX="665.0" layoutY="10.0" />
-                  <TextField fx:id="txtAesDecryptionKey" prefHeight="26.0" prefWidth="330.0" promptText="AES Decryption Key">
+                  <TextField fx:id="txtAesDecryptionKey" minHeight="30.0" minWidth="350.0" promptText="AES Decryption Key">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -83,15 +83,15 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox layoutX="10.0" layoutY="105.0" spacing="10.0">
+            <HBox layoutX="10.0" layoutY="105.0" minHeight="50.0" spacing="10.0">
                <children>
                   <Label text="Enter Ciphertext to Decrypt">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea fx:id="txtAesCiphertext" prefHeight="180.0" prefWidth="570.0" promptText="Ciphertext to Decrypt" />
-                  <Region minWidth="0.0" prefHeight="25.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <TextArea fx:id="txtAesCiphertext" minWidth="580.0" prefHeight="50.0" promptText="Ciphertext to Decrypt" />
+                  <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets left="8.0" />

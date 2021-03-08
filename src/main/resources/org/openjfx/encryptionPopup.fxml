@@ -37,7 +37,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Region minWidth="25.0" HBox.hgrow="ALWAYS">
+                  <Region fx:id="regionKeyPrepend" minWidth="25.0" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets left="10.0" right="10.0" />
                      </padding>
@@ -63,8 +63,8 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Region />
-                  <TextArea fx:id="aesEncryptionText" editable="false" minHeight="40.0" minWidth="580.0" prefHeight="40.0" promptText="Encryption Message" />
+                  <Region fx:id="regionMessagePrepend" minWidth="0.0" />
+                  <TextArea fx:id="aesEncryptionText" editable="false" minHeight="180.0" minWidth="580.0" promptText="Encryption Message" />
                   <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>

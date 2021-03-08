@@ -162,11 +162,11 @@ public class EncryptionController {
             scene = new Scene(root);
             stage.hide();
             stage.setMinWidth(780);
-            stage.setMinHeight(340);
+            stage.setMinHeight(360);
             stage.setMaxWidth(780);
-            stage.setMaxHeight(340);
+            stage.setMaxHeight(360);
             stage.setWidth(780);
-            stage.setHeight(340);
+            stage.setHeight(360);
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
