@@ -124,12 +124,12 @@ public class DecryptionController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.hide();
-            stage.setMinWidth(780);
-            stage.setMinHeight(480);
-            stage.setMaxWidth(780);
-            stage.setMaxHeight(480);
-            stage.setWidth(780);
-            stage.setHeight(480);
+            stage.setMinWidth(800);
+            stage.setMinHeight(500);
+            stage.setMaxWidth(800);
+            stage.setMaxHeight(500);
+            stage.setWidth(800);
+            stage.setHeight(500);
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();

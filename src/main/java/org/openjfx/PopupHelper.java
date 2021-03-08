@@ -103,12 +103,12 @@ public class PopupHelper {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.hide();
-        stage.setMinWidth(780);
-        stage.setMinHeight(300);
-        stage.setMaxWidth(780);
-        stage.setMaxHeight(300);
-        stage.setWidth(780);
-        stage.setHeight(300);
+        stage.setMinWidth(800);
+        stage.setMinHeight(320);
+        stage.setMaxWidth(800);
+        stage.setMaxHeight(320);
+        stage.setWidth(800);
+        stage.setHeight(320);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
