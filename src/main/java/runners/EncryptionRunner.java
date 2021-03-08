@@ -55,11 +55,8 @@ public class EncryptionRunner {
         encryptionModel.setIvString(GeneratorService.generateIV());
         encryptionModel.setMessage(message);
 
-        // Encrypt Message
-        String ciphertext = EncryptDecryptService.encrypt(encryptionModel);
-
         // Return IV prepended to Ciphertext
-        return (encryptionModel.getIvString() + ciphertext);
+        return (encryptionModel.getIvString() + EncryptDecryptService.encrypt(encryptionModel));
     }
 
     public static void decryptionRunner(String IvAndCiphertext, String encryptionKey) throws NoSuchAlgorithmException, IllegalBlockSizeException, InvalidKeyException, BadPaddingException, InvalidAlgorithmParameterException, NoSuchPaddingException {
@@ -110,10 +107,7 @@ public class EncryptionRunner {
         encryptionModel.setMessage(ivAndCiphertextArr[1]);
         encryptionModel.setKeyString(encryptionKey);
 
-        // Decrypt Message
-        String plaintext = EncryptDecryptService.decrypt(encryptionModel);
-
         // Return Decrypted Message
-        return plaintext;
+        return EncryptDecryptService.decrypt(encryptionModel);
     }
 }
