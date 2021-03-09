@@ -30,6 +30,18 @@ public class GeneratorService {
         return UtilConverters.secretKeyToString(keyGenerator.generateKey());
     }
 
+    // Generate Secure Salt using secure random function for generation
+    public static String generateSalt() {
+
+        // Use Secure Random to generate random bytes for salt in cryptographically secure way
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[64];
+        random.nextBytes(salt);
+
+        // Return generated salt to caller as Hex String
+        return UtilHexConv.toHex(salt);
+    }
+
     // Generate Secret Key from user given password, note this is much less secure than random generation
     public static String getKeyFromPassword(String password, String salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException {

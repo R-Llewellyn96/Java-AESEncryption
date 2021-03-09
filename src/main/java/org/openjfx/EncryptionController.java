@@ -27,6 +27,9 @@ public class EncryptionController {
     private RadioButton radioButton128;
 
     @FXML
+    private RadioButton radioButton256;
+
+    @FXML
     private TextField aesEncryptionKey;
 
     @FXML
@@ -40,6 +43,22 @@ public class EncryptionController {
 
     @FXML
     private Button generateEncryptedTextBtn;
+
+    // Function allows for setting of key value from outside of window, used for PBE Key Generation
+    public void setValues(String keyString) {
+        aesEncryptionKey.setText(keyString);
+    }
+
+    // Function allows for selecting of radio button from outside of window, used for PBE Key Generation
+    public void setRadioButton256Selection(Boolean radioBtn256Selected) {
+        if (radioBtn256Selected) {
+            radioButton128.setSelected(false);
+            radioButton256.setSelected(true);
+        } else {
+            radioButton128.setSelected(true);
+            radioButton256.setSelected(false);
+        }
+    }
 
     // Returns the required key length based on selection
     private int keyLenRequired() {
@@ -86,18 +105,24 @@ public class EncryptionController {
 
     // Handle click event on generate key using password button
     @FXML
-    protected void handlePasswordKeyGenButtonAction() {
+    protected void handlePasswordKeyGenButtonAction(ActionEvent event) {
         Window owner = generateEncryptionKeyPassword.getScene().getWindow();
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
-            // Replace string with function to generate AES key and return string
-            String testString = "Im a testing string!";
-            aesEncryptionKey.setText(testString);
-
-            // Alert user that a key has been generated for them and tell them where it is
-            AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Encryption Key Generation Successful!",
-                    "Valid AES Encryption key has been added to your text field!");
+            Parent root = FXMLLoader.load(getClass().getResource("passwordPopup.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.hide();
+            stage.setMinWidth(800);
+            stage.setMinHeight(400);
+            stage.setMaxWidth(800);
+            stage.setMaxHeight(400);
+            stage.setWidth(800);
+            stage.setHeight(400);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
 
             // If theres a problem, tell user there was an error
         } catch (Exception e) {
