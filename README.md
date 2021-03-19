@@ -26,10 +26,3 @@ Future Updates:<br />
 - [ ] Steganography integration (PNG only, if requested).
 <br />
 <!-- end of the list -->
-Future Updates <br />
-<br />
-- [x] Possible addition of automated AES key gathering from codebook in user selected path. <br />
-- [ ] User ability to change default generated codebook file path. <br />
-- [ ] File Encryption & Decryption. <br />
-- [ ] Dark Mode GUI (If requested). <br />
-- [ ] Steganography integration (PNG only, if requested). <br />
