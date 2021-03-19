@@ -17,8 +17,8 @@ What do you get with this program?<br />
 Future Updates:<br />
 <br />
 
-- [ ] Possible addition of automated AES key gathering from codebook in user selected path.
-- [ ] User ability to change default generated codebook file path.
+- [ ] Possible addition of automated AES key gathering from Codebook in user selected path.
+- [ ] User ability to change default generated Codebook file path.
 - [ ] File Encryption & Decryption.
 - [ ] Dark Mode GUI (If requested).
 - [ ] Steganography integration (PNG only, if requested).
