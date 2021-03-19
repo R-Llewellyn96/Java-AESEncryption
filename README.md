@@ -5,9 +5,6 @@ Supporting key bit lengths of 128 bits and 256 bits. <br />
 <br />
 What do you get with this program?<br />
 <br />
-<br />
-Future Updates:<br />
-<br />
 
 - [x] A completed task  
 - [x] Functionality for AES Key Generation using secure random or Password Based Encryption.
@@ -17,8 +14,6 @@ Future Updates:<br />
 - [x] AES Decryption using 128 bit or 256 bit keys.
 - [x] AES Codebook Generation for any selectable month of the year, a unique key for each day at the users desired key length of either 128 bits or 256 bits, each key is generated using a secure method.
 - [x] A user friendly GUI interface for all your encryption needs!
-
-- [ ] An uncompleted task
 <!-- -->
 <br />
 Future Updates:<br />
