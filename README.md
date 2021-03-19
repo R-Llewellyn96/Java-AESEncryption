@@ -7,7 +7,7 @@ What do you get with this program?<br />
 <br />
 
 - [x] A completed task  
-Foldable text
+<br />Foldable text
 - [ ] An uncompleted task
 
 - [x] Functionality for AES Key Generation using secure random or Password Based Encryption. <br />
