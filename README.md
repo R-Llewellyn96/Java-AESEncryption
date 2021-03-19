@@ -24,13 +24,11 @@ Future Updates:<br />
 Future Updates:<br />
 <br />
 
-- [x] Functionality for AES Key Generation using secure random or Password Based Encryption. <br />
-- [x] Selection of desired Key Generation Length of 128 or 256 bits. <br />
-- [x] Automated Initialisation Vector Generation in a secure manner and prepending to ciphertext. <br />
-- [x] AES Encryption using 128 bit or 256 bit keys. <br />
-- [x] AES Decryption using 128 bit or 256 bit keys. <br />
-- [x] AES Codebook Generation for any selectable month of the year, a unique key for each day at the users desired key length of either 128 bits or 256 bits, each key is generated using a secure method. <br />
-- [x] A user friendly GUI interface for all your encryption needs! <br />
+- [ ] Possible addition of automated AES key gathering from codebook in user selected path.
+- [ ] User ability to change default generated codebook file path.
+- [ ] File Encryption & Decryption.
+- [ ] Dark Mode GUI (If requested).
+- [ ] Steganography integration (PNG only, if requested).
 <br />
 <!-- end of the list -->
 Future Updates <br />
