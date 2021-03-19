@@ -10,8 +10,12 @@ Future Updates:<br />
 <br />
 
 - [x] A completed task  
-<br />Foldable text
+
 - [ ] An uncompleted task
+<!-- -->
+<br />
+Future Updates:<br />
+<br />
 
 - [x] Functionality for AES Key Generation using secure random or Password Based Encryption. <br />
 - [x] Selection of desired Key Generation Length of 128 or 256 bits. <br />
