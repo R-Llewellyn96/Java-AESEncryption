@@ -6,8 +6,8 @@ Supporting key bit lengths of 128 bits and 256 bits. <br />
 What do you get with this program?<br />
 <br />
 
-- [x] A completed task
-
+- [x] A completed task  
+Foldable text
 - [ ] An uncompleted task
 
 - [x] Functionality for AES Key Generation using secure random or Password Based Encryption. <br />
