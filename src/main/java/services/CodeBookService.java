@@ -26,14 +26,19 @@ public class CodeBookService {
     // Returns the number of days in a month, selected by user
     public static Integer daysInMonth (int monthNo) {
 
-        // Switch statement switching between selected months
-        return switch (monthNo) {
-            case 2 -> 28; // February assumed as non-Leap Year
-            case 4, 6, 9, 11 -> 30;
-            case 1, 3, 5, 7, 8, 10, 12 -> 31;
-            case 13 -> 29; // 13 is added as February on Leap Year
-            default -> throw new IllegalStateException("Unexpected Value:" + monthNo);
-        };
+        // If statement switching between selected months (replaced switch statement for Java 11 compatibility)
+        if (monthNo == 2) {
+            return 28; // February assumed as non-Leap Year
+        } else if (monthNo == 4 || monthNo == 6 || monthNo == 9 || monthNo == 11 ) {
+            return 30;
+        } else if (monthNo == 1 || monthNo == 3|| monthNo == 5 || monthNo == 7 || monthNo == 8 || monthNo == 10 || monthNo == 12) {
+            return 31;
+        } else if (monthNo == 13) {
+            return 29; // February assumed as Leap Year
+        } else {
+            // If outside of range
+            throw new IllegalStateException("Unexpected Value:" + monthNo);
+        }
     }
 
     // Returns the name of a user selected month
@@ -43,21 +48,22 @@ public class CodeBookService {
         // if so convert value to just 2 (february)
         if (monthNo == 13) { monthNo = 2; }
 
-        // Switch statement, returns string of month name selected
-        return switch (monthNo) {
-            case 1 -> "January";
-            case 2 -> "February";
-            case 3 -> "March";
-            case 4 -> "April";
-            case 5 -> "May";
-            case 6 -> "June";
-            case 7 -> "July";
-            case 8 -> "August";
-            case 9 -> "September";
-            case 10 -> "October";
-            case 11 -> "November";
-            case 12 -> "December";
-            default -> throw new IllegalStateException("Unexpected value: " + monthNo);
-        };
+        // If statement switching between selected months (replaced switch statement for Java 11 compatibility)
+        if (monthNo == 1) { return "January"; }
+        else if (monthNo == 2) { return "February"; }
+        else if (monthNo == 3) { return "March"; }
+        else if (monthNo == 4) { return "April"; }
+        else if (monthNo == 5) { return "May"; }
+        else if (monthNo == 6) { return "June"; }
+        else if (monthNo == 7) { return "July"; }
+        else if (monthNo == 8) { return "August"; }
+        else if (monthNo == 9) { return "September"; }
+        else if (monthNo == 10) { return "October"; }
+        else if (monthNo == 11) { return "November"; }
+        else if (monthNo == 12) { return "December";
+        } else {
+            // If outside of range
+            throw new IllegalStateException("Unexpected Value:" + monthNo);
+        }
     }
 }

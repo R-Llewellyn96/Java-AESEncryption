@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EncryptionController">
+<BorderPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EncryptionFileController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -68,13 +67,13 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="aesEncryptionKey" prefHeight="25.0" prefWidth="327.0" promptText="AES Encryption Key">
+                  <TextField fx:id="txtfieldAesEncryptionKey" prefHeight="25.0" prefWidth="327.0" promptText="AES Encryption Key">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <Button fx:id="generateEncryptionKeyRandom" mnemonicParsing="false" onAction="#handleKeyGenButtonAction" text="Generate Key" />
-                  <Button fx:id="generateEncryptionKeyPassword" layoutX="331.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePasswordKeyGenButtonAction" text="Generate from Password" />
+                  <Button fx:id="btnEncryptionKeyRandom" mnemonicParsing="false" onAction="#handleKeyGenButtonAction" text="Generate Key" />
+                  <Button fx:id="btnEncryptionKeyPassword" layoutX="331.0" layoutY="10.0" mnemonicParsing="false" onAction="#handlePasswordKeyGenButtonAction" text="Generate from Password" />
                   <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
@@ -86,12 +85,18 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="105.0" spacing="10.0">
                <children>
-                  <Label text="Enter Message to Encrypt">
+                  <Label text="File Path for Encryption">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea fx:id="aesEncryptionText" minHeight="180.0" minWidth="580.0" promptText="Encryption Message" />
+                  <Region>
+                     <padding>
+                        <Insets left="4.0" />
+                     </padding>
+                  </Region>
+                  <TextField fx:id="txtfieldFileLoc" editable="false" prefWidth="448.0" promptText="File Location" />
+                  <Button fx:id="btnSelectFile" mnemonicParsing="false" onAction="#handleSelectFileButtonAction" text="Select File To Encrypt" />
                   <Region HBox.hgrow="ALWAYS" />
                </children>
                <padding>
@@ -103,12 +108,17 @@
             </HBox>
             <HBox layoutX="15.0" layoutY="159.0" spacing="10.0">
                <children>
-                  <Label text="Encrypt Message ">
+                  <Label text="Encrypt File">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Button fx:id="generateEncryptedTextBtn" mnemonicParsing="false" onAction="#handleEncryptButtonAction" text="Encrypt Messge">
+                  <Region>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                  </Region>
+                  <Button fx:id="btnEncryptFile" mnemonicParsing="false" onAction="#handleEncryptFileButtonAction" text="Encrypt File">
                      <HBox.margin>
                         <Insets left="40.0" />
                      </HBox.margin>

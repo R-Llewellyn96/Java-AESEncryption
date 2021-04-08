@@ -1,5 +1,7 @@
 package org.openjfx;
 
+import controllers.CodebookGenerator;
+import controllers.FileEncryptController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,15 +9,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import model.EncryptionFileModel;
 import org.openjfx.validation.Validation;
 import runners.EncryptionRunner;
 import services.GeneratorService;
 
+import java.io.File;
 import java.io.IOException;
 
-public class EncryptionController {
+public class EncryptionFileController {
 
     private Stage stage;
     private Scene scene;
@@ -30,23 +35,36 @@ public class EncryptionController {
     private RadioButton radioButton256;
 
     @FXML
-    private TextField aesEncryptionKey;
+    private TextField txtfieldAesEncryptionKey;
 
     @FXML
-    private TextArea aesEncryptionText;
+    private TextField txtfieldFileLoc;
 
     @FXML
-    private Button generateEncryptionKeyRandom;
+    private Button btnReturnToMainMenu;
 
     @FXML
-    private Button generateEncryptionKeyPassword;
+    private Button btnEncryptionKeyRandom;
 
     @FXML
-    private Button generateEncryptedTextBtn;
+    private Button btnEncryptionKeyPassword;
+
+    @FXML
+    private Button btnSelectFile;
+
+    @FXML
+    private Button btnEncryptFile;
+
+    private File selectedFile = null;
 
     // Function allows for setting of key value from outside of window, used for PBE Key Generation
     public void setValues(String keyString) {
-        aesEncryptionKey.setText(keyString);
+        txtfieldAesEncryptionKey.setText(keyString);
+    }
+
+    // Function allows for setting of key value from outside of window, used for PBE Key Generation
+    public void setValuesFileLocation(String keyString) {
+        txtfieldFileLoc.setText(keyString);
     }
 
     // Function allows for selecting of radio button from outside of window, used for PBE Key Generation
@@ -84,13 +102,13 @@ public class EncryptionController {
     // Handle click event on generate key randomly button
     @FXML
     protected void handleKeyGenButtonAction() {
-        Window owner = generateEncryptionKeyRandom.getScene().getWindow();
+        Window owner = btnEncryptionKeyRandom.getScene().getWindow();
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
             // Replace string with function to generate AES key and return string
             String keyString = GeneratorService.generateKey("AES", keyLengthBits());
-            aesEncryptionKey.setText(keyString);
+            txtfieldAesEncryptionKey.setText(keyString);
 
             // Alert user that a key has been generated for them and tell them where it is
             AlertHelper.showAlert(Alert.AlertType.CONFIRMATION, owner, "Encryption Key Generation Successful!",
@@ -106,7 +124,7 @@ public class EncryptionController {
     // Handle click event on generate key using password button
     @FXML
     protected void handlePasswordKeyGenButtonAction(ActionEvent event) {
-        Window owner = generateEncryptionKeyPassword.getScene().getWindow();
+        Window owner = btnEncryptionKeyPassword.getScene().getWindow();
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
@@ -131,70 +149,98 @@ public class EncryptionController {
         }
     }
 
-    // Handle click event on submit button to generate ciphertext
+    // Handle click event on File Selection button to get file
     @FXML
-    protected void handleEncryptButtonAction(ActionEvent event) {
-        Window owner = generateEncryptedTextBtn.getScene().getWindow();
+    protected void handleSelectFileButtonAction(ActionEvent event) {
+        Window owner = btnEncryptionKeyRandom.getScene().getWindow();
+
+        // Define instance of file chooser
+        FileChooser fileChooser = new FileChooser();
+
+        // Get user selected file from dialog
+        selectedFile = fileChooser.showOpenDialog(owner);
+
+        // Check whether user has selected file, if not set path to blank
+        if (selectedFile != null) {
+            // Get path to selected file
+            String filePathString = selectedFile.getAbsolutePath();
+
+            // Set file path in text field
+            txtfieldFileLoc.setText(filePathString);
+        } else {
+            // Set file path in text field
+            txtfieldFileLoc.setText("");
+        }
+    }
+
+        // Handle click event on submit button to generate ciphertext
+    @FXML
+    protected void handleEncryptFileButtonAction(ActionEvent event) {
+        Window owner = btnEncryptFile.getScene().getWindow();
 
         // Handle form validation
-        if(aesEncryptionKey.getText().isEmpty()) {
+        if(txtfieldAesEncryptionKey.getText().isEmpty()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Please enter an AES Encryption Key!");
             return;
         }
-        if(aesEncryptionText.getText().isEmpty()) {
+        if(txtfieldFileLoc.getText().isEmpty()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
-                    "Please enter a message to encrypt!");
+                    "Please enter a Path to your file to encrypt!");
             return;
         }
-        if(aesEncryptionKey.getText().length() != keyLenRequired()) {
+        if(txtfieldAesEncryptionKey.getText().length() != keyLenRequired()) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
-                    "AES Encryption key length is: " + aesEncryptionKey.getText().length()  + ", not the required length of: " + keyLenRequired());
+                    "AES Encryption key length is: " + txtfieldAesEncryptionKey.getText().length()  + ", not the required length of: " + keyLenRequired());
             return;
         }
-        if(!Validation.isValidKey(aesEncryptionKey.getText())) {
+        if(!Validation.isValidKey(txtfieldAesEncryptionKey.getText())) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Invalid AES Key, please try a valid key!");
+            return;
+        }
+        if(selectedFile == null) {
+            AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
+                    "No file selected! Please select file for Encryption.");
             return;
         }
 
         // Run if no validation has failed
         try {
             // Define key and message
-            String key = aesEncryptionKey.getText().trim();
-            String message = aesEncryptionText.getText();
+            String key = txtfieldAesEncryptionKey.getText().trim();
+            String filePath = txtfieldFileLoc.getText().trim();
 
-            // Perform encryption, passing message and key
-            String IVAndCiphertext = EncryptionRunner.encryptionRunnerWKey(message, key);
+            // Perform encryption, passing file and key
 
-            // Switch to finished popup if successful containing data
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("encryptionPopup.fxml"));
-            Parent root = loader.load();
+            // Define encryption model object
+            EncryptionFileModel encryptionFileModel = new EncryptionFileModel();
 
-            // Load controller from popup
-            PopupHelper popupHelper = loader.getController();
+            // Set object values
+            encryptionFileModel.setEncryptionAlgorithm("AES/CBC/PKCS5Padding");
+            encryptionFileModel.setKeyString(key);
+            encryptionFileModel.setIvString(GeneratorService.generateIV());
+            encryptionFileModel.setFile(selectedFile);
+            
+            // Generate empty output file to fill
+            File outputFile = new File("encryptedFile.BIN");
 
-            // Use popup controller instance to call method and set values
-            popupHelper.setValues(key, IVAndCiphertext);
+            // Encrypt bytes from selected file into output file
+            FileEncryptController.encryptFiles(encryptionFileModel, selectedFile, outputFile);
 
-            // Generate window of popup
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.hide();
-            stage.setMinWidth(800);
-            stage.setMinHeight(500);
-            stage.setMaxWidth(800);
-            stage.setMaxHeight(500);
-            stage.setWidth(800);
-            stage.setHeight(500);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
+            // Create output file in OS filesystem
+            if (outputFile.createNewFile()) {
+                AlertHelper.showAlert(Alert.AlertType.INFORMATION, owner, "File Encryption successful!",
+                        "New Encrypted File Generated!");
+            } else {
+                AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "File Encryption successful!",
+                        "Existing Encrypted File Overwritten!");
+            }
 
             // If validation fails, show error message
         } catch (Exception e) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Runtime Error!",
-                    "Unable to Encrypt ciphertext, please check inputs and try again!");
+                    "Unable to Encrypt file, please check inputs and try again!");
         }
     }
 
