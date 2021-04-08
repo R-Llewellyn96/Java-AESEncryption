@@ -10,7 +10,6 @@ package controllers;
 
 // import java input / output, crypto and security libraries
 import model.EncryptionFileModel;
-import model.EncryptionModel;
 import services.GeneratorService;
 import utils.UtilConverters;
 import utils.UtilHexConv;

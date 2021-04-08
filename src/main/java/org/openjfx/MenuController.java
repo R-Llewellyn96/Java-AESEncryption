@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MenuController {
 
@@ -17,7 +18,7 @@ public class MenuController {
 
     // Encryption Window
     public void switchToEncryption(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("encryptionWindow.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("encryptionWindow.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
@@ -34,7 +35,7 @@ public class MenuController {
 
     // Decryption Window
     public void switchToDecryption(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("decryptionWindow.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("decryptionWindow.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
@@ -52,7 +53,7 @@ public class MenuController {
 
     // Codebook window
     public void switchToCodebook(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("codebookWindow.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("codebookWindow.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
@@ -69,7 +70,7 @@ public class MenuController {
 
     // Encryption File window
     public void switchToEncryptionFile(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("encryptionFileWindow.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("encryptionFileWindow.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
@@ -86,7 +87,7 @@ public class MenuController {
 
     // Decryption File window
     public void switchToDecryptionFile(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("decryptionFileWindow.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("decryptionFileWindow.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();

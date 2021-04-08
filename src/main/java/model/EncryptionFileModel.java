@@ -43,7 +43,5 @@ public class EncryptionFileModel {
     public void setFile(File file) {
         this.file = file;
     }
-    public File getFile() {
-        return file;
-    }
+    public File getFile() { return file; }
 }

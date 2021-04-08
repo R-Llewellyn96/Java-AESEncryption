@@ -14,6 +14,7 @@ import runners.EncryptionRunner;
 import services.GeneratorService;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EncryptionController {
 
@@ -110,7 +111,7 @@ public class EncryptionController {
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("passwordPopup.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("passwordPopup.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.hide();
@@ -152,7 +153,7 @@ public class EncryptionController {
                     "AES Encryption key length is: " + aesEncryptionKey.getText().length()  + ", not the required length of: " + keyLenRequired());
             return;
         }
-        if(!Validation.isValidKey(aesEncryptionKey.getText())) {
+        if(Validation.isValidKey(aesEncryptionKey.getText())) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Invalid AES Key, please try a valid key!");
             return;
@@ -200,7 +201,7 @@ public class EncryptionController {
 
     // Menu window
     public void switchToMainMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();

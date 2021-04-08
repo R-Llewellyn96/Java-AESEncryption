@@ -1,6 +1,5 @@
 package org.openjfx;
 
-import controllers.CodebookGenerator;
 import controllers.FileEncryptController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,11 +13,11 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.EncryptionFileModel;
 import org.openjfx.validation.Validation;
-import runners.EncryptionRunner;
 import services.GeneratorService;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class EncryptionFileController {
 
@@ -128,7 +127,7 @@ public class EncryptionFileController {
 
         // Try catch in case the AES key generation fails or setting text fails
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("passwordPopup.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("passwordPopup.fxml")));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.hide();
@@ -152,7 +151,7 @@ public class EncryptionFileController {
     // Handle click event on File Selection button to get file
     @FXML
     protected void handleSelectFileButtonAction(ActionEvent event) {
-        Window owner = btnEncryptionKeyRandom.getScene().getWindow();
+        Window owner = btnSelectFile.getScene().getWindow();
 
         // Define instance of file chooser
         FileChooser fileChooser = new FileChooser();
@@ -194,7 +193,7 @@ public class EncryptionFileController {
                     "AES Encryption key length is: " + txtfieldAesEncryptionKey.getText().length()  + ", not the required length of: " + keyLenRequired());
             return;
         }
-        if(!Validation.isValidKey(txtfieldAesEncryptionKey.getText())) {
+        if(Validation.isValidKey(txtfieldAesEncryptionKey.getText())) {
             AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!",
                     "Invalid AES Key, please try a valid key!");
             return;
@@ -246,7 +245,7 @@ public class EncryptionFileController {
 
     // Menu window
     public void switchToMainMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();

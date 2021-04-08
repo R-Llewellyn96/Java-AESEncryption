@@ -14,14 +14,9 @@ public class Validation {
         // Perform regex pattern matching against given string
         Pattern pattern = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(passedKeyString);
-        boolean matchFound = matcher.find();
 
         // Return the opposite of found matches, i.e. if found return false, if not found return true
-        if (matchFound == true) {
-            return false;
-        } else {
-            return true;
-        }
+        return matcher.find();
     }
 
 }

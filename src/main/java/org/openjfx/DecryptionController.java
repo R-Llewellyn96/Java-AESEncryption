@@ -12,6 +12,7 @@ import javafx.stage.Window;
 import runners.EncryptionRunner;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class DecryptionController {
 
@@ -144,7 +145,7 @@ public class DecryptionController {
 
     // Menu window
     public void switchToMainMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mainMenu.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.hide();
