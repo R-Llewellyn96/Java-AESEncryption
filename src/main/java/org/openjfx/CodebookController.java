@@ -20,7 +20,7 @@ public class CodebookController {
     private RadioButton radioButton128;
 
     @FXML
-    private ChoiceBox choiceBoxMonth;
+    private ChoiceBox<String> choiceBoxMonth;
 
     @FXML
     private Button btnGenerateCodebook;
@@ -45,11 +45,9 @@ public class CodebookController {
         // Sets selected month to 13 if leap year is selected
         if (selectedMonth <= 0) {
             return;
-        } else if (selectedMonth < 3) {
-           selectedMonth = selectedMonth;
         } else if (selectedMonth == 3) {
             selectedMonth = 13;
-        } else {
+        } else if (selectedMonth > 3) {
             selectedMonth = selectedMonth - 1;
         }
 
