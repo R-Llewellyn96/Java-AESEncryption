@@ -32,26 +32,23 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="13.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.MenuController">
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.MenuController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <HBox fillHeight="false" prefHeight="43.0" prefWidth="490.0">
+            <HBox fillHeight="false">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Select Program Mode" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets bottom="10.0" left="162.0" right="162.0" top="10.0" />
+                        <Insets bottom="10.0" left="55.0" right="55.0" top="10.0" />
                      </HBox.margin>
                   </Label>
                </children>
@@ -69,16 +66,6 @@
                      </HBox.margin>
                   </Button>
                   <Button fx:id="btnCodebookMenu" alignment="CENTER" mnemonicParsing="false" onAction="#switchToCodebook" text="Codebook&#10;Generation">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnEncryptionFile" alignment="CENTER" mnemonicParsing="false" onAction="#switchToEncryptionFile" text="File&#10;Encryption">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnDecryptionFile" alignment="CENTER" mnemonicParsing="false" onAction="#switchToDecryptionFile" text="File&#10;Decryption">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>

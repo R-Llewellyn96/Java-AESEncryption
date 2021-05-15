@@ -70,12 +70,12 @@ public class CodebookController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.hide();
-        stage.setMinWidth(500);
-        stage.setMinHeight(135);
-        stage.setMaxWidth(500);
-        stage.setMaxHeight(135);
-        stage.setWidth(500);
-        stage.setHeight(135);
+        stage.setMinWidth(310);
+        stage.setMinHeight(150);
+        stage.setMaxWidth(310);
+        stage.setMaxHeight(150);
+        stage.setWidth(310);
+        stage.setHeight(150);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
